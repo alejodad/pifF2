@@ -7,7 +7,7 @@ $(document).ready(function(){
       contenedorInputs.append('<div class="mb-3"><label for="cantidad" class="form-label" >Cantidad de cargas</label><input type="number" id="cantidad" name="cantidad" class="form-control"  min="2" required></div><div id="cant"></div>');
 
     }
-    else{
+    else if(seleccion == 2) {
       contenedorInputs.append('<div class="mb-3"><div class="row"><div class="col-6 pe-0"><label class="form-label" for="lambda">Lambda:</label><input type="number" name="lambda" id="lambda" class="form-control text-end pe-0" step="0.0001" required=""></div>  <div class="col-1 pt-4 ps-0 pe-0">    <label class="form-label" for=""></label><span class="input-group-text" id="">^</span></div><div class="col-5 ps-0"><label class="form-label" for="potenciaCarga1">Potencia Lmabda:</label><input type="number" name="potenciaCarga1" id="potenciaCarga1" class="form-control text-end " step="0.0001" required=""></div></div></div><div class="mb-3"><label for="radio" class="form-label" >Radio</label><input type="number" id="radio" name="radio" class="form-control text-end "  " required></div><div class="mb-3"><label for="distancia" class="form-label" >Distancia</label><input type="number" id="distancia" name="distancia" class="form-control text-end "  required></div>');
       
     }
