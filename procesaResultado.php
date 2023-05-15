@@ -1,12 +1,15 @@
 <?php 
 if(!empty($_POST)){
+  //guardando los valores de los inputs
 $metodo=$_POST["metodo"];
 
-  //dependiendo del metodo seleccionado tomara el file  y llamara el comando
+  
+
+
+//dependiendo del metodo seleccionado tomara el file  y llamara el comando
   switch ($metodo) {
   case 1:
     $file= dirname(__FILE__).'/potencialKD.py';
-    echo returnComand($metodo,$file);
     exec(returnComand($metodo,$file), $output);
     echo implode("\n", $output);
     break;
@@ -23,39 +26,36 @@ $metodo=$_POST["metodo"];
 
 }
 
-
 //metodo para retornar el comando de shell
 function returnComand($metodo,$file){
   $command="";
+  $cmd = "python";
   if($metodo==1){
+    
+    //este array captura la el retorno de la funcion
+    $argumento_c_r= (unir_inputs(($_POST['cantidad'])));
     $opc=1;
-    //guardando inputs
-    $val_c_r=unir_inputs($_POST['cantidad']);
-    $cmd = "python";
     //creando argumentos del comando
     $args = [
     "$file",
-    "$val_c_r[0]",
-    "$val_c_r[1]",
+    "$argumento_c_r[0]",
+    "$argumento_c_r[1]",
     "$opc"
     ];
     $escaped_args = implode(" ", array_map("escapeshellarg", $args));
     //armando comando
     $command = "$cmd $escaped_args";
     return $command;
+    
   }else{
-    $valorX_puntoA=$_POST["input1"];
-    $puntoB=$_POST["input2"];
-    $tol=$_POST["input3"];
-    $nVeces=$_POST["input4"];
-    $cmd = "python";
+    $lamda =$_POST['lambda']."e".$_POST['potenciaCarga1'];
+    $r=$_POST['radio'];
+    $l=$_POST['distancia'];
     $args = [
     "$file",
-    "$valorX_puntoA",
-    "$puntoB",
-    "$tol",
-    "$nVeces",
-    "$expresion"
+    "$lamda",
+    "$r",
+    "$l"
     ];
     $escaped_args = implode(" ", array_map("escapeshellarg", $args));
     $command = "$cmd $escaped_args";
@@ -64,18 +64,25 @@ function returnComand($metodo,$file){
   }
 }
 
-function unir_inputs($cantidad) {
+//esta funcion crea una cadena que hara de arreglo para py
+  function unir_inputs($cantidad) {
+    //definidneo variables
   $q = "";
-  $r = "";
+  $r ="";
+    //se recorre segun la cantidad de cargas del input
   for ($i = 1; $i <= $cantidad; $i++) {
+    //creandao array q
     $carga = $_POST['carga'.$i];
     $potencia = $_POST['potenciaCarga'.$i];
-    $q .= $carga.'e'.$potencia." ";
-    $r .= $_POST['dCarga'.$i]." ";
-    
+    //seteando valor segun se pide en py
+    $resultado = $carga.'e'.$potencia;
+    $q .= $resultado." ";
+    // creando array r
+    $dCarga = $_POST['dCarga'.$i];
+    $r .= $dCarga." ";
   }
-  // Retornar dos variables como un array
-  return array($q, $r);
-}
+    //se devuelven las dos cadenas en un array
+    return array($q,$r);
+  }
 
 ?>

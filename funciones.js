@@ -41,7 +41,7 @@ function validarMetodo(){
   }else if (verificarInputs()){
     $.post("procesaResultado.php", $("#data").serialize(), function(data){
       Swal.fire(data);
-         //$('#divEspecifico').html(data);
+      //   $('#divEspecifico').html(data);
      });
   }
 }
