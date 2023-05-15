@@ -34,7 +34,7 @@ function returnComand($metodo,$file){
     
     //este array captura la el retorno de la funcion
     $argumento_c_r= (unir_inputs(($_POST['cantidad'])));
-    $opc=1;
+    $opc = isset($_POST['verTodo']) ? 1 : 0;
     //creando argumentos del comando
     $args = [
     "$file",

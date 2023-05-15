@@ -23,7 +23,7 @@ $(document).ready(function(){
         for (var i = 1; i <= cantidad; i++) {
            contenedorInputsC.append('<div class="row pb-3"><div class="col-md-6"><div class="row"><div class="col-6 pe-0"><label class="form-label" for="carga' + i + '">Carga ' + i + ':</label><input type="number" name="carga' + i + '" id="carga' + i + '" class="form-control text-end pe-0" step="0.0001" required=""></div>  <div class="col-1 pt-4 ps-0 pe-0">    <label class="form-label" for=""></label><span class="input-group-text" id="">^</span></div><div class="col-5 ps-0"><label class="form-label" for="potenciaCarga' + i + '">Potencia Carga ' + i + ':</label><input type="number" name="potenciaCarga' + i + '" id="potenciaCarga' + i + '" class="form-control text-end " step="0.0001" required=""></div></div></div><div class="col-md-6"><label class="form-label" for="dCarga' + i + '">Distancia carga ' + i + ':</label><input type="number" name="dCarga' + i + '" id="dCarga' + i + '" class="form-control text-end " step="0.0001" required></div></div>');
         }
-    contenedorInputsC.append('<div class="pricing-header px-3 py-3 pb-md-4 mx-auto text-center"><p class="lead">Por último indica si deseas ver el potencial por cada carga</p></div>');
+    contenedorInputsC.append('<div class="pricing-header px-3 py-3 pb-md-4 mx-auto text-center"><p class="lead">Por último indica si deseas ver el potencial por cada carga</p></div><div class="form-check"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="verTodo"><label class="form-check-label" for="flexCheckDefault">Deseo ver el potencial por cada carga</label></div>');
     });
     });
       
@@ -53,6 +53,9 @@ function verificarInputs() {
   
   // Verificar si todos los inputs tienen un valor
   for (let i = 0; i < inputs.length; i++) {
+    if (inputs[i].type === 'checkbox') {
+    continue; // Si es un checkbox, saltar a la siguiente iteración del bucle
+  }
     if (inputs[i].value === '') {
       Swal.fire({
   icon: 'error',
