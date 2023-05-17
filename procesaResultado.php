@@ -72,13 +72,21 @@ function returnComand($metodo,$file){
     //se recorre segun la cantidad de cargas del input
   for ($i = 1; $i <= $cantidad; $i++) {
     //creandao array q
+    if(strpos($_POST['carga'.$i], ",") !== false){
+      str_replace(",",".",$_POST['carga'.$i]);
+    }else{
     $carga = $_POST['carga'.$i];
+      }
     $potencia = $_POST['potenciaCarga'.$i];
     //seteando valor segun se pide en py
     $resultado = $carga.'e'.$potencia;
     $q .= $resultado." ";
     // creando array r
-    $dCarga = $_POST['dCarga'.$i];
+    if(strpos($_POST['dCarga'.$i], ",") !== false){
+    $dCarga = str_replace(",",".",$_POST['dCarga'.$i]);
+    }else{
+      $dCarga = $_POST['dCarga'.$i];
+    }
     $r .= $dCarga." ";
   }
     //se devuelven las dos cadenas en un array
